@@ -1,0 +1,21 @@
+id;piso;lotacao;tomadas;projector ou id;piso;lotacao;projector
+1;0;70;15;false
+2;0;57;20;false
+3;0;94;30;true
+4;0;47;13;false
+5;0;84;true
+101;1;87;13;true
+102;1;49;13;true
+103;1;63;false
+104;1;54;true
+105;1;58;13;true
+201;2;63;false
+202;2;56;true
+203;2;77;false
+204;2;79;13;true
+205;2;60;30;true
+301;3;72;30;true
+302;3;66;false
+303;3;85;true
+304;3;83;true
+305;3;53;13;false

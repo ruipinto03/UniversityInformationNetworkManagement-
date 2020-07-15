@@ -1,0 +1,25 @@
+lista aluno -> nome datanascimento
+Earl Jee;10/09/1988;
+Efren Rawcliffe;02/06/1984;
+Laurie Crewdson;05/10/1973;
+Cody Labell;21/11/1981;
+Brittany Servant;25/08/1972;
+Shandra Patrone;10/03/1983;
+Murry Cridlin;09/02/1983;
+Ardelis Crooke;06/08/1971;
+Kipp Reubel;30/07/1977;
+Debi Melato;21/04/1982;
+Feliks Reyburn;27/06/1972;
+Jarid Lomis;18/06/1985;
+Nina Swynfen;09/09/1978;
+Waylin Spurr;20/10/1981;
+Katie Ivashov;20/08/1987;
+Bryana Whightman;29/07/1976;
+Percy Hakes;01/06/1981;
+Ryann Karpmann;09/09/1972;
+Rochella Harbour;08/04/1982;
+Jehu Di Claudio;16/03/1970;
+Sonnie Rymmer;04/02/1988;
+Lucienne Stetlye;17/08/1976;
+Ely Stainton - Skinn;06/03/1982;
+Shane Goodright;06/06/1972;

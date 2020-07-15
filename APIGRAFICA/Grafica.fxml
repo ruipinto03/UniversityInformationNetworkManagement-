@@ -1,0 +1,1112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Point3D?>
+<?import javafx.scene.Group?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="768.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="APIGRAFICA.GraficaControlador">
+   <children>
+      <MenuBar layoutY="2.0" prefHeight="25.0" prefWidth="1024.0">
+        <menus>
+          <Menu mnemonicParsing="false" text="File">
+            <items>
+                  <Menu mnemonicParsing="false" text="Carregar dados">
+                    <items>
+                      <MenuItem mnemonicParsing="false" onAction="#handlerCarregamentoTotal" text="Carregar tudo .txt" />
+                        <MenuItem mnemonicParsing="false" onAction="#handlerCarregamentoTotalBin" text="Carregar tudo .bin" />
+                    </items>
+                  </Menu>
+                  <Menu mnemonicParsing="false" text="Gravar dados">
+                     <items>
+                        <MenuItem mnemonicParsing="false" onAction="#handlerGravarTotal" text="Gravar tudo .txt" />
+                        <MenuItem mnemonicParsing="false" onAction="#handlerGravarTotalBin" text="Gravar tudo .bin" />
+                     </items>
+                  </Menu>
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Carregar Ficheiros">
+            <items>
+                  <MenuItem mnemonicParsing="false" onAction="#handlerCarregarAlunos" text="Carregar Alunos" />
+                  <MenuItem mnemonicParsing="false" onAction="#handlerCarregarAtendimentos" text="Carregar Atendimentos" />
+                  <MenuItem mnemonicParsing="false" onAction="#handlerCarregarCursos" text="Carregar Cursos" />
+              <MenuItem mnemonicParsing="false" onAction="#handlerCarregarDisciplinas" text="Carregar Disciplinas" />
+                  <MenuItem mnemonicParsing="false" onAction="#handlerCarregarHorario" text="Carregar Horarios" />
+                  <MenuItem mnemonicParsing="false" onAction="#handlerCarregarProfessores" text="Carregar Professores" />
+                  <MenuItem mnemonicParsing="false" onAction="#handlerCarregarTurmas" text="Carregar Turmas" />
+                  <MenuItem mnemonicParsing="false" onAction="#handlerCarregarSalas" text="Carregar Salas" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Help">
+            <items>
+              <MenuItem mnemonicParsing="false" text="About" />
+            </items>
+          </Menu>
+        </menus>
+      </MenuBar>
+      <TabPane layoutY="27.0" prefHeight="740.0" prefWidth="1024.0" tabClosingPolicy="UNAVAILABLE">
+        <tabs>
+          <Tab onSelectionChanged="#handleApresentaDadosCBCurso" text="Curso">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <SplitPane dividerPositions="0.29797979797979796" prefHeight="712.0" prefWidth="1024.0">
+                          <items>
+                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="730.0" prefWidth="302.0">
+                                 <children>
+                                    <Label layoutX="19.0" layoutY="78.0" text="Nome do curso">
+                                       <font>
+                                          <Font name="System Bold" size="14.0" />
+                                       </font>
+                                    </Label>
+                                    <TextField fx:id="tfNomeCurso" layoutX="19.0" layoutY="95.0" prefHeight="25.0" prefWidth="234.0" promptText="Nome do curso" />
+                                    <Button layoutX="17.0" layoutY="131.0" mnemonicParsing="false" onAction="#handlerAdicionarCurso" prefHeight="25.0" prefWidth="232.0" text="Adicionar curso" />
+                                    <TextArea fx:id="tASeleccaoCursoTabCurso" editable="false" layoutX="13.0" layoutY="258.0" prefHeight="203.0" prefWidth="241.0" />
+                                    <Label layoutX="15.0" layoutY="228.0" text="Informação sobre o curso">
+                                       <font>
+                                          <Font name="System Bold" size="14.0" />
+                                       </font>
+                                    </Label>
+                                    <ComboBox fx:id="cbSeleccaoCursoTabCurso" layoutX="12.0" layoutY="191.0" onAction="#handleApresentaDadosTACurso" prefHeight="25.0" prefWidth="242.0" />
+                                    <Label layoutX="18.0" layoutY="171.0" text="Selecione um curso">
+                                       <font>
+                                          <Font name="System Bold" size="14.0" />
+                                       </font>
+                                    </Label>
+                                    <Label layoutX="19.0" layoutY="26.0" text="Identificador curso">
+                                       <font>
+                                          <Font name="System Bold" size="14.0" />
+                                       </font>
+                                    </Label>
+                                    <TextField fx:id="tfIdCurso" layoutX="19.0" layoutY="43.0" prefHeight="25.0" prefWidth="234.0" promptText="Nome do curso" />
+                                    <Button layoutX="9.0" layoutY="479.0" mnemonicParsing="false" onAction="#handleRemoverCurso" prefHeight="25.0" prefWidth="245.0" text="Remover curso selecionado" />
+                                 </children></AnchorPane>
+                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                                 <children>
+                                    <TableView fx:id="tVTabCurso" prefHeight="713.0" prefWidth="715.0">
+                                      <columns>
+                                        <TableColumn fx:id="tVTabCursoID" prefWidth="75.0" text="ID" />
+                                        <TableColumn fx:id="tVTabCursoNome" prefWidth="151.0" text="NOME DO CURSO" />
+                                          <TableColumn fx:id="tVTabCursoNrUc" prefWidth="187.0" text="NUMERO DE TURMAS" />
+                                      </columns>
+                                    </TableView>
+                                 </children></AnchorPane>
+                          </items>
+                        </SplitPane>
+                     </children></AnchorPane>
+            </content>
+          </Tab>
+            <Tab onSelectionChanged="#handleApresentaDadosCBUC" text="Unidades Curriculares">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <SplitPane dividerPositions="0.3195991091314031" prefHeight="713.0" prefWidth="1024.0">
+                           <items>
+                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="698.0" prefWidth="324.0">
+                                 <children>
+                                    <Label layoutX="14.0" layoutY="6.0" text="Nome da unidade Curricular">
+                                       <font>
+                                          <Font name="System Bold" size="14.0" />
+                                       </font>
+                                    </Label>
+                                    <TextField fx:id="tfNomeUcUC" layoutX="14.0" layoutY="23.0" prefHeight="25.0" prefWidth="234.0" />
+                                    <Button layoutX="16.0" layoutY="155.0" mnemonicParsing="false" onAction="#handlerAdicionarUcUC" prefHeight="25.0" prefWidth="232.0" text="Adicionar unidade curricular" />
+                                    <Button layoutX="17.0" layoutY="198.0" mnemonicParsing="false" onAction="#handleRemoverUcUC" prefHeight="25.0" prefWidth="250.0" text="Remover Unidade Curricular" />
+                                    <ComboBox fx:id="cbSeleccaoAnoTabUC" layoutX="18.0" layoutY="89.0" prefHeight="25.0" prefWidth="105.0" />
+                                    <ComboBox fx:id="cbSeleccaoSemestreTabUC" layoutX="142.0" layoutY="89.0" prefHeight="25.0" prefWidth="105.0" />
+                                    <Label layoutX="18.0" layoutY="58.0" text="Ano">
+                                       <font>
+                                          <Font name="System Bold" size="14.0" />
+                                       </font>
+                                    </Label>
+                                    <Label layoutX="142.0" layoutY="58.0" text="Semestre">
+                                       <font>
+                                          <Font name="System Bold" size="14.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </AnchorPane>
+                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                                 <children>
+                                    <TableView fx:id="tVTabUcUC" prefHeight="715.0" prefWidth="691.0">
+                                       <columns>
+                                          <TableColumn fx:id="tVTabUcUCnome" prefWidth="297.0" text="UNIDADES CURRICULARES" />
+                                          <TableColumn fx:id="tVTabUcUCano" minWidth="0.0" prefWidth="77.0" text="ANO" />
+                                          <TableColumn fx:id="tVTabUcUCsemestre" minWidth="0.0" prefWidth="98.0" text="SEMESTRE" />
+                                       </columns>
+                                    </TableView>
+                                 </children>
+                              </AnchorPane>
+                           </items>
+                        </SplitPane>
+                     </children></AnchorPane>
+            </content>
+          </Tab>
+            <Tab onSelectionChanged="#handleApresentaDadosCBTurma" text="Turmas">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <SplitPane dividerPositions="0.3195991091314031" prefHeight="711.0" prefWidth="1024.0">
+                           <items>
+                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                                 <children>
+                                    <Label layoutX="14.0" layoutY="14.0" text="Criar turma para uma unidade curricular">
+                                       <font>
+                                          <Font name="System Bold" size="14.0" />
+                                       </font>
+                                    </Label>
+                                    <ComboBox fx:id="cbSeleccaoUCTabTurma" layoutX="14.0" layoutY="34.0" prefHeight="25.0" prefWidth="232.0" />
+                                    <Button layoutX="18.0" layoutY="177.0" mnemonicParsing="false" onAction="#handlerAdicionarTurma" prefHeight="25.0" prefWidth="232.0" text="Adicionar turma" />
+                                    <Label layoutX="16.0" layoutY="66.0" text="Selecionar professor para a turma">
+                                       <font>
+                                          <Font name="System Bold" size="14.0" />
+                                       </font>
+                                    </Label>
+                                    <ComboBox fx:id="cbSeleccaoProfessorTabTurma" layoutX="16.0" layoutY="86.0" prefHeight="25.0" prefWidth="232.0" />
+                                    <Label layoutX="16.0" layoutY="119.0" text="Selecionar curso para a turma">
+                                       <font>
+                                          <Font name="System Bold" size="14.0" />
+                                       </font>
+                                    </Label>
+                                    <ComboBox fx:id="cbSeleccaoCursoTabTurma" layoutX="16.0" layoutY="139.0" onAction="#handleApresentaDadosTaTurmas" prefHeight="25.0" prefWidth="232.0" />
+                                    <TextArea fx:id="tASeleccaoCursoTabTurmas" editable="false" layoutX="18.0" layoutY="214.0" prefHeight="98.0" prefWidth="251.0" />
+                                    <Button layoutX="19.0" layoutY="318.0" mnemonicParsing="false" onAction="#handleRemoverTurma" prefHeight="25.0" prefWidth="250.0" text="Remover Turma" />
+                                 </children>
+                              </AnchorPane>
+                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                                 <children>
+                                    <TableView fx:id="tVTabUcTurmas" layoutY="2.0" prefHeight="322.0" prefWidth="694.0">
+                                       <columns>
+                                          <TableColumn fx:id="tVTabUcTurmaNome" prefWidth="166.0" text="UNIDADES CURRICULARES" />
+                                          <TableColumn fx:id="tVTabUcTurmaAno" prefWidth="166.0" text="ANO" />
+                                          <TableColumn fx:id="tVTabUcTurmaSemestre" prefWidth="166.0" text="SEMESTRE" />
+                                       </columns>
+                                    </TableView>
+                                    <TableView fx:id="tVTabTurmasTurma" layoutY="323.0" prefHeight="388.0" prefWidth="692.0">
+                                       <columns>
+                                          <TableColumn fx:id="tVTabTurmasTurmaId" prefWidth="75.0" text="ID" />
+                                          <TableColumn fx:id="tVTabTurmasTurmaNome" prefWidth="151.0" text="Turma" />
+                                          <TableColumn fx:id="tVTabTurmasTurmaProfessor" prefWidth="187.0" text="Professor" />
+                                       </columns>
+                                    </TableView>
+                                 </children>
+                              </AnchorPane>
+                           </items>
+                        </SplitPane>
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+            <Tab onSelectionChanged="#handleApresentaDadosTVTurma" text="Professor">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <SplitPane dividerPositions="0.3195991091314031" prefHeight="715.0" prefWidth="1024.0">
+                           <items>
+                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                                 <children>
+                                    <Label layoutX="14.0" layoutY="14.0" text="Nome do professor">
+                                       <font>
+                                          <Font name="System Bold" size="14.0" />
+                                       </font>
+                                    </Label>
+                                    <TextField fx:id="tfNomeProfessor" layoutX="14.0" layoutY="41.0" prefHeight="25.0" prefWidth="259.0" />
+                                    <DatePicker fx:id="dpDataNascimentoProfessor" layoutX="14.0" layoutY="111.0" />
+                                    <Label layoutX="14.0" layoutY="80.0" text="Data de nascimento">
+                                       <font>
+                                          <Font name="System Bold" size="14.0" />
+                                       </font>
+                                    </Label>
+                                    <Button layoutX="14.0" layoutY="158.0" mnemonicParsing="false" onAction="#handlerAdicionarProfessor" prefHeight="25.0" prefWidth="259.0" text="Adicionar Professor" />
+                                    <Button layoutX="13.0" layoutY="206.0" mnemonicParsing="false" onAction="#handleRemoverProfessor" prefHeight="25.0" prefWidth="259.0" text="Remover Professor" />
+                                 </children>
+                              </AnchorPane>
+                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                                 <children>
+                                    <TableView fx:id="tVTabProfessor" prefHeight="712.0" prefWidth="692.0">
+                                       <columns>
+                                          <TableColumn fx:id="tVTabProfessorId" prefWidth="34.0" text="ID" />
+                                          <TableColumn fx:id="tVTabProfessorNome" prefWidth="142.0" text="Nome" />
+                                          <TableColumn fx:id="tVTabProfessorDataNascimento" prefWidth="146.0" text="DATA DE NASCIMENTO" />
+                                          <TableColumn fx:id="tVTabProfessorEmail" prefWidth="151.0" text="EMAIL" />
+                                          <TableColumn fx:id="tVTabProfessorNumeroTurmas" prefWidth="151.0" text="EMAIL" />
+                                       </columns>
+                                    </TableView>
+                                 </children>
+                              </AnchorPane>
+                           </items>
+                        </SplitPane>
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+            <Tab onSelectionChanged="#handleApresentaDadosCBAluno" text="Alunos">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <SplitPane dividerPositions="0.3195991091314031" prefHeight="713.0" prefWidth="1024.0">
+                           <items>
+                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                                 <children>
+                                    <Button layoutX="17.0" layoutY="251.0" mnemonicParsing="false" onAction="#handlerAdicionarAluno" prefHeight="25.0" prefWidth="258.0" text="Adicionar aluno" />
+                                    <Button layoutX="18.0" layoutY="287.0" mnemonicParsing="false" onAction="#handlerRemoverAluno" prefHeight="25.0" prefWidth="256.0" text="Remover aluno" />
+                                    <Label layoutX="15.0" layoutY="14.0" text="Nome do aluno">
+                                       <font>
+                                          <Font name="System Bold" size="14.0" />
+                                       </font>
+                                    </Label>
+                                    <TextField fx:id="tfNomeAluno" layoutX="15.0" layoutY="34.0" prefHeight="25.0" prefWidth="257.0" />
+                                    <Label layoutX="15.0" layoutY="68.0" text="Data de nascimento">
+                                       <font>
+                                          <Font name="System Bold" size="14.0" />
+                                       </font>
+                                    </Label>
+                                    <DatePicker fx:id="dpDataNascimentoAluno" layoutX="15.0" layoutY="88.0" />
+                                    <ComboBox fx:id="cbSeleccaoAnoTabAluno" layoutX="14.0" layoutY="153.0" prefWidth="150.0" />
+                                    <Label layoutX="15.0" layoutY="125.0" text="Escolha o ano de curso">
+                                       <font>
+                                          <Font name="System Bold" size="14.0" />
+                                       </font>
+                                    </Label>
+                                    <ComboBox fx:id="cbSeleccaoCursoTabAluno" layoutX="14.0" layoutY="216.0" prefHeight="25.0" prefWidth="255.0" />
+                                    <Label layoutX="15.0" layoutY="188.0" text="Escolha o curso">
+                                       <font>
+                                          <Font name="System Bold" size="14.0" />
+                                       </font>
+                                    </Label>
+                                    <Button layoutX="14.0" layoutY="371.0" mnemonicParsing="false" onAction="#handlerAnoCursoAluno" prefHeight="25.0" prefWidth="256.0" text="Adicionar Curso e ano" />
+                                    <Button layoutX="16.0" layoutY="412.0" mnemonicParsing="false" onAction="#handlerRemoverCursoAluno" prefHeight="25.0" prefWidth="256.0" text="Remover curso " />
+                                 </children>
+                              </AnchorPane>
+                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                                 <children>
+                                    <TableView fx:id="tVTabAlunos" prefHeight="716.0" prefWidth="694.0">
+                                       <columns>
+                                          <TableColumn fx:id="tVTabAlunoId" prefWidth="28.0" text="ID" />
+                                          <TableColumn fx:id="tVTabAlunoNome" prefWidth="117.0" text="NOME" />
+                                          <TableColumn fx:id="tVTabAlunoDataNascimento" prefWidth="139.0" text="DATA NASCIMENTO" />
+                                          <TableColumn fx:id="tVTabAlunoEmail" prefWidth="115.0" text="EMAIL" />
+                                          <TableColumn fx:id="tVTabAlunoCurso" prefWidth="113.0" text="CURSO" />
+                                          <TableColumn fx:id="tVTabAlunoUnidadesInscritos" prefWidth="97.0" text="CADEIRAS" />
+                                       </columns>
+                                    </TableView>
+                                 </children>
+                              </AnchorPane>
+                           </items>
+                        </SplitPane>
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+            <Tab onSelectionChanged="#handleApresentaDadosCBAlunoTurmaAluno" text="Turmas para o aluno">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <SplitPane dividerPositions="0.23719376391982183" prefHeight="716.0" prefWidth="1024.0">
+                          <items>
+                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                                 <children>
+                                    <Label layoutX="14.0" layoutY="43.0" text="Aluno" />
+                                    <Label layoutX="14.0" layoutY="89.0" text="Turmas" />
+                                    <ComboBox fx:id="cbAlunoTurmasAlunoTA" layoutX="65.0" layoutY="39.0" onAction="#handlerSelecionarAlunoTurmasAlunoTA" prefHeight="25.0" prefWidth="131.0" promptText="Selecionar aluno" />
+                                    <ComboBox fx:id="cbTurmaTurmasAlunoTA" layoutX="66.0" layoutY="85.0" prefHeight="25.0" prefWidth="137.0" promptText="Selecionar turma" />
+                                    <Button layoutX="11.0" layoutY="164.0" mnemonicParsing="false" onAction="#handlerInserirTurmasAlunoTA" prefHeight="25.0" prefWidth="188.0" text="Inserir" />
+                                    <Button layoutX="11.0" layoutY="128.0" mnemonicParsing="false" onAction="#handlerPesquisarTurmasAlunoTA" prefHeight="25.0" prefWidth="188.0" text="Pesquisar" />
+                                    <Button layoutX="11.0" layoutY="211.0" mnemonicParsing="false" onAction="#handlerRemoverTurmasAlunoTA" prefHeight="25.0" prefWidth="188.0" text="Remover" />
+                                 </children>
+                              </AnchorPane>
+                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                                 <children>
+                                    <TableView fx:id="tVTurmaAluno" prefHeight="715.0" prefWidth="778.0">
+                                      <columns>
+                                        <TableColumn fx:id="tVTurmaAlunoId" prefWidth="75.0" text="ID" />
+                                          <TableColumn fx:id="tVTurmaAlunoUc" prefWidth="156.0" text="UNIDADE CURRICULAR" />
+                                          <TableColumn fx:id="tVTurmaAlunoProfessor" prefWidth="204.0" text="PROFESSOR" />
+                                      </columns>
+                                    </TableView>
+                                 </children>
+                              </AnchorPane>
+                          </items>
+                        </SplitPane>
+                     </children></AnchorPane>
+               </content>
+            </Tab>
+            <Tab onSelectionChanged="#handleApresentaDadosCBSala" text="Salas">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <SplitPane dividerPositions="0.3195991091314031" prefHeight="714.0" prefWidth="1024.0">
+                           <items>
+                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                                 <children>
+                                    <Button layoutX="17.0" layoutY="193.0" mnemonicParsing="false" onAction="#handlerAdicionarSala" prefHeight="25.0" prefWidth="258.0" text="Adicionar sala" />
+                                    <Button layoutX="18.0" layoutY="229.0" mnemonicParsing="false" onAction="#handlerRemoverSala" prefHeight="25.0" prefWidth="256.0" text="Remover sala" />
+                                    <Label layoutX="15.0" layoutY="14.0" text="Id da sala">
+                                       <font>
+                                          <Font name="System Bold" size="14.0" />
+                                       </font>
+                                    </Label>
+                                    <TextField fx:id="tfIdSala" layoutX="15.0" layoutY="34.0" prefHeight="25.0" prefWidth="69.0" />
+                                    <ComboBox fx:id="cbSeleccaoPisoSala" layoutX="17.0" layoutY="95.0" prefHeight="25.0" prefWidth="62.0" />
+                                    <Label layoutX="18.0" layoutY="67.0" text="Piso">
+                                       <font>
+                                          <Font name="System Bold" size="14.0" />
+                                       </font>
+                                    </Label>
+                                    <Label layoutX="110.0" layoutY="14.0" text="Lotação">
+                                       <font>
+                                          <Font name="System Bold" size="14.0" />
+                                       </font>
+                                    </Label>
+                                    <TextField fx:id="tfLotacao" layoutX="107.0" layoutY="34.0" prefHeight="25.0" prefWidth="69.0" />
+                                    <Label layoutX="192.0" layoutY="14.0" text="Tomadas">
+                                       <font>
+                                          <Font name="System Bold" size="14.0" />
+                                       </font>
+                                    </Label>
+                                    <TextField fx:id="tfTomadas" layoutX="189.0" layoutY="34.0" prefHeight="25.0" prefWidth="69.0" />
+                                    <Label layoutX="45.0" layoutY="132.0" text="X">
+                                       <font>
+                                          <Font name="System Bold" size="14.0" />
+                                       </font>
+                                    </Label>
+                                    <TextField fx:id="tfXSala" layoutX="15.0" layoutY="152.0" prefHeight="25.0" prefWidth="69.0" />
+                                    <Label layoutX="137.0" layoutY="132.0" text="Y">
+                                       <font>
+                                          <Font name="System Bold" size="14.0" />
+                                       </font>
+                                    </Label>
+                                    <TextField fx:id="tfYSala" layoutX="107.0" layoutY="152.0" prefHeight="25.0" prefWidth="69.0" />
+                                    <ComboBox fx:id="cbSeleccaoProjectorSala" layoutX="98.0" layoutY="95.0" prefHeight="25.0" prefWidth="157.0" />
+                                    <Label layoutX="98.0" layoutY="67.0" text="Projector">
+                                       <font>
+                                          <Font name="System Bold" size="14.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </AnchorPane>
+                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                                 <children>
+                                    <TableView fx:id="tVTabSalas" prefHeight="712.0" prefWidth="692.0">
+                                       <columns>
+                                          <TableColumn fx:id="tVTabSalaId" prefWidth="42.0" text="ID" />
+                                          <TableColumn fx:id="tVTabSalaLotacao" prefWidth="118.0" text="LOTACAO" />
+                                          <TableColumn fx:id="tVTabSalaTomadas" prefWidth="86.0" text="TOMADAS" />
+                                          <TableColumn fx:id="tVTabSalaPiso" prefWidth="56.0" text="PISO" />
+                                          <TableColumn fx:id="tVTabSalaProjecto" prefWidth="89.0" text="PROJECTOR" />
+                                          <TableColumn fx:id="tVTabSalaX" prefWidth="32.0" text="X" />
+                                          <TableColumn fx:id="tVTabSalaY" prefWidth="35.0" text="Y" />
+                                          <TableColumn fx:id="tVTabSalaZ" prefWidth="35.0" text="Z" />
+                                       </columns>
+                                    </TableView>
+                                 </children>
+                              </AnchorPane>
+                           </items>
+                        </SplitPane>
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+            <Tab onSelectionChanged="#handleApresentaDadosCBHorario" text="Horario">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <SplitPane dividerPositions="0.3195991091314031" prefHeight="714.0" prefWidth="1024.0">
+                           <items>
+                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                                 <children>
+                                    <Button layoutX="19.0" layoutY="264.0" mnemonicParsing="false" onAction="#handlerAdicionarHorario" prefHeight="25.0" prefWidth="258.0" text="Adicionar horario">
+                                       <font>
+                                          <Font name="System Bold Italic" size="12.0" />
+                                       </font>
+                                    </Button>
+                                    <Button layoutX="14.0" layoutY="490.0" mnemonicParsing="false" onAction="#handlerRemoverHorario" prefHeight="25.0" prefWidth="256.0" text="Remover Horario">
+                                       <font>
+                                          <Font name="System Bold Italic" size="12.0" />
+                                       </font>
+                                    </Button>
+                                    <Text layoutX="13.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Turma">
+                                       <font>
+                                          <Font name="System Bold" size="14.0" />
+                                       </font>
+                                    </Text>
+                                    <ComboBox fx:id="cbSeleccaoTurmaTabHorario" layoutX="13.0" layoutY="31.0" prefWidth="150.0" />
+                                    <Text layoutX="178.0" layoutY="24.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Sala">
+                                       <font>
+                                          <Font name="System Bold" size="14.0" />
+                                       </font>
+                                    </Text>
+                                    <ComboBox fx:id="cbSeleccaoSalaTabHorario" layoutX="178.0" layoutY="28.0" prefHeight="25.0" prefWidth="77.0" />
+                                    <Label layoutX="20.0" layoutY="80.0" text="Hora inicio">
+                                       <font>
+                                          <Font name="System Bold" size="14.0" />
+                                       </font>
+                                    </Label>
+                                    <Label layoutX="148.0" layoutY="80.0" text="Hora fim">
+                                       <font>
+                                          <Font name="System Bold" size="14.0" />
+                                       </font>
+                                    </Label>
+                                    <Label layoutX="148.0" layoutY="139.0" text="Minutos fim">
+                                       <font>
+                                          <Font name="System Bold" size="14.0" />
+                                       </font>
+                                    </Label>
+                                    <Label layoutX="16.0" layoutY="139.0" text="Minutos inicio">
+                                       <font>
+                                          <Font name="System Bold" size="14.0" />
+                                       </font>
+                                    </Label>
+                                    <Label layoutX="16.0" layoutY="196.0" text="Dia da semana">
+                                       <font>
+                                          <Font name="System Bold" size="14.0" />
+                                       </font>
+                                    </Label>
+                                    <ComboBox fx:id="cbMIHorario" layoutX="13.0" layoutY="171.0" prefHeight="25.0" prefWidth="120.0" />
+                                    <ComboBox fx:id="cbMFHorario" layoutX="145.0" layoutY="171.0" prefHeight="25.0" prefWidth="120.0" />
+                                    <ComboBox fx:id="cbHIHorario" layoutX="16.0" layoutY="100.0" prefHeight="25.0" prefWidth="120.0" />
+                                    <ComboBox fx:id="cbHFHorario" layoutX="148.0" layoutY="100.0" prefHeight="25.0" prefWidth="120.0" />
+                                    <ComboBox fx:id="cbDiaSemanaHorario" layoutX="16.0" layoutY="227.0" prefHeight="25.0" prefWidth="251.0" />
+                                    <ComboBox fx:id="cbSeleccaoTurmaTabHorarioDel" layoutX="17.0" layoutY="320.0" prefWidth="150.0" />
+                                    <ComboBox fx:id="cbSeleccaoSalaTabHorarioDel" layoutX="182.0" layoutY="317.0" prefHeight="25.0" prefWidth="77.0" />
+                                    <Label layoutX="25.0" layoutY="354.0" text="Hora inicio">
+                                       <font>
+                                          <Font name="System Bold" size="14.0" />
+                                       </font>
+                                    </Label>
+                                    <Label layoutX="153.0" layoutY="354.0" text="Hora fim">
+                                       <font>
+                                          <Font name="System Bold" size="14.0" />
+                                       </font>
+                                    </Label>
+                                    <ComboBox fx:id="cbHIHorarioDel" layoutX="21.0" layoutY="374.0" prefHeight="25.0" prefWidth="120.0" />
+                                    <ComboBox fx:id="cbHFHorarioDel" layoutX="153.0" layoutY="374.0" prefHeight="25.0" prefWidth="120.0" />
+                                    <Text layoutX="42.0" layoutY="307.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Turma">
+                                       <font>
+                                          <Font name="System Bold" size="14.0" />
+                                       </font>
+                                    </Text>
+                                    <Text layoutX="207.0" layoutY="304.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Sala">
+                                       <font>
+                                          <Font name="System Bold" size="14.0" />
+                                       </font>
+                                    </Text>
+                                    <Label layoutX="20.0" layoutY="410.0" text="Dia da semana">
+                                       <font>
+                                          <Font name="System Bold" size="14.0" />
+                                       </font>
+                                    </Label>
+                                    <ComboBox fx:id="cbDiaSemanaHorarioDel" layoutX="20.0" layoutY="441.0" prefHeight="25.0" prefWidth="251.0" />
+                                 </children>
+                              </AnchorPane>
+                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                                 <children>
+                                    <TableView fx:id="tVTabHorario" prefHeight="711.0" prefWidth="692.0">
+                                       <columns>
+                                          <TableColumn fx:id="tVTabHorarioId" prefWidth="83.0" text="ID TURMA" />
+                                          <TableColumn fx:id="tVTabHorarioCadeira" prefWidth="75.0" text="DISCIPLINA" />
+                                          <TableColumn fx:id="tVTabHorarioSala" prefWidth="77.0" text="SALA" />
+                                          <TableColumn fx:id="tVTabHorarioHoraInicio" prefWidth="95.0" text="HORA INICIO" />
+                                          <TableColumn fx:id="tVTabHorarioHoraFim" prefWidth="98.0" text="HORA FIM" />
+                                          <TableColumn fx:id="tVTabHorariorDiaSemana" prefWidth="113.0" text="DIA DA SEMANA" />
+                                       </columns>
+                                    </TableView>
+                                 </children>
+                              </AnchorPane>
+                           </items>
+                        </SplitPane>
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+            <Tab onSelectionChanged="#handleApresentaDadosCBAtendimentos" text="Atendimento">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <SplitPane dividerPositions="0.3195991091314031" prefHeight="713.0" prefWidth="1024.0">
+                           <items>
+                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                                 <children>
+                                    <Button layoutX="20.0" layoutY="246.0" mnemonicParsing="false" onAction="#handlerAdicionarAtendimento" prefHeight="25.0" prefWidth="244.0" text="Adicionar atendimento" />
+                                    <Button layoutX="21.0" layoutY="282.0" mnemonicParsing="false" onAction="#handlerRemoverAtendimento" prefHeight="25.0" prefWidth="243.0" text="Remover atendimento" />
+                                    <ComboBox fx:id="cbSeleccaoProfessorAtendimento" layoutX="18.0" layoutY="42.0" prefHeight="25.0" prefWidth="131.0" />
+                                    <Label layoutX="17.0" layoutY="14.0" text="Professor">
+                                       <font>
+                                          <Font name="System Bold" size="14.0" />
+                                       </font>
+                                    </Label>
+                                    <Label layoutX="28.0" layoutY="77.0" text="Hora inicio">
+                                       <font>
+                                          <Font name="System Bold" size="14.0" />
+                                       </font>
+                                    </Label>
+                                    <Label layoutX="137.0" layoutY="132.0" text="Minutos fim">
+                                       <font>
+                                          <Font name="System Bold" size="14.0" />
+                                       </font>
+                                    </Label>
+                                    <Label layoutX="139.0" layoutY="77.0" text="Hora fim">
+                                       <font>
+                                          <Font name="System Bold" size="14.0" />
+                                       </font>
+                                    </Label>
+                                    <Label layoutX="28.0" layoutY="132.0" text="Minutos Inicio">
+                                       <font>
+                                          <Font name="System Bold" size="14.0" />
+                                       </font>
+                                    </Label>
+                                    <ComboBox fx:id="cbSeleccaoAlunoAtendimento" layoutX="22.0" layoutY="346.0" prefHeight="25.0" prefWidth="182.0" promptText="Selecionar aluno" />
+                                    <Label layoutX="21.0" layoutY="318.0" text="Marcar atendimento">
+                                       <font>
+                                          <Font name="System Bold" size="14.0" />
+                                       </font>
+                                    </Label>
+                                    <Label layoutX="161.0" layoutY="19.0" text="Sala">
+                                       <font>
+                                          <Font name="System Bold" size="14.0" />
+                                       </font>
+                                    </Label>
+                                    <Button layoutX="20.0" layoutY="385.0" mnemonicParsing="false" onAction="#handlerMarcarAtendimento" prefHeight="25.0" prefWidth="258.0" text="Marcar atendimento" />
+                                    <ComboBox fx:id="cbSeleccaoSalaAtendimento" layoutX="161.0" layoutY="42.0" prefHeight="25.0" prefWidth="97.0" />
+                                    <ComboBox fx:id="cbHIAtendimento" layoutX="21.0" layoutY="97.0" prefHeight="25.0" prefWidth="109.0" />
+                                    <ComboBox fx:id="cbHFAtendimento" layoutX="144.0" layoutY="97.0" prefHeight="25.0" prefWidth="109.0" />
+                                    <ComboBox fx:id="cbMIAtendimento" layoutX="18.0" layoutY="152.0" prefHeight="25.0" prefWidth="109.0" />
+                                    <ComboBox fx:id="cbMFAtendimento" layoutX="141.0" layoutY="152.0" prefHeight="25.0" prefWidth="109.0" />
+                                    <Label layoutX="31.0" layoutY="187.0" text="Dia de semana">
+                                       <font>
+                                          <Font name="System Bold" size="14.0" />
+                                       </font>
+                                    </Label>
+                                    <ComboBox fx:id="cbDiaSemanaAtendimento" layoutX="21.0" layoutY="207.0" prefHeight="25.0" prefWidth="243.0" />
+                                 </children>
+                              </AnchorPane>
+                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                                 <children>
+                                    <TableView fx:id="tVTabAtendimentos" prefHeight="715.0" prefWidth="691.0">
+                                       <columns>
+                                          <TableColumn fx:id="tVTabAtendimentoProfessor" prefWidth="168.0" text="Professor" />
+                                          <TableColumn fx:id="tVTabAtendimentoHorario" prefWidth="138.0" text="HORARIO" />
+                                          <TableColumn fx:id="tVTabAtendimentoAluno" prefWidth="188.0" text="ALUNO" />
+                                       </columns>
+                                    </TableView>
+                                 </children>
+                              </AnchorPane>
+                           </items>
+                        </SplitPane>
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+           <Tab onSelectionChanged="#handleApresentaDadosCBPesquisas" text="Pesquisas">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <TabPane prefHeight="714.0" prefWidth="1024.0" tabClosingPolicy="UNAVAILABLE">
+                          <tabs>
+                            <Tab onSelectionChanged="#handleApresentaDadosCBPesquisaSalasL" text="Salas Livres">
+                              <content>
+                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                       <children>
+                                          <SplitPane dividerPositions="0.36971046770601335" prefHeight="685.0" prefWidth="1024.0">
+                                            <items>
+                                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="519.0" prefWidth="282.0">
+                                                   <children>
+                                                      <ComboBox fx:id="cbPesquisaSalasLHI1" layoutX="113.0" layoutY="79.0" prefHeight="25.0" prefWidth="124.0" />
+                                                      <ComboBox fx:id="cbPesquisaSalasLDiaSemana" layoutX="113.0" layoutY="38.0" prefHeight="25.0" prefWidth="123.0" />
+                                                      <Label layoutX="14.0" layoutY="42.0" text="Dia da semana">
+                                                         <font>
+                                                            <Font name="System Bold" size="14.0" />
+                                                         </font>
+                                                      </Label>
+                                                      <Label layoutX="14.0" layoutY="83.0" text="Hora inicio">
+                                                         <font>
+                                                            <Font name="System Bold" size="14.0" />
+                                                         </font>
+                                                      </Label>
+                                                      <Label layoutX="14.0" layoutY="14.0" text="Todas as salas livres num determinado horario">
+                                                         <font>
+                                                            <Font name="System Bold" size="14.0" />
+                                                         </font>
+                                                      </Label>
+                                                      <Label layoutX="12.0" layoutY="210.0" text="A ocupacao de uma sala entre data">
+                                                         <font>
+                                                            <Font name="System Bold" size="14.0" />
+                                                         </font>
+                                                      </Label>
+                                                      <Button layoutX="18.0" layoutY="179.0" mnemonicParsing="false" onAction="#handlePesquisaSalaLivreEntreHorarios" prefHeight="25.0" prefWidth="298.0" text="Pesquisa" />
+                                                      <Button layoutX="12.0" layoutY="333.0" mnemonicParsing="false" onAction="#handlePesquisaSalaOcupadasEntreHorarios" prefHeight="25.0" prefWidth="298.0" text="Pesquisa" />
+                                                      <ComboBox fx:id="cbPesquisaSalasLHI2" layoutX="117.0" layoutY="242.0" prefHeight="25.0" prefWidth="124.0" />
+                                                      <ComboBox fx:id="cbPesquisaSalasLHF2" layoutX="120.0" layoutY="291.0" prefHeight="25.0" prefWidth="121.0" />
+                                                      <Label layoutX="18.0" layoutY="246.0" text="Hora inicio">
+                                                         <font>
+                                                            <Font name="System Bold" size="14.0" />
+                                                         </font>
+                                                      </Label>
+                                                      <Label layoutX="18.0" layoutY="295.0" text="Hora fim">
+                                                         <font>
+                                                            <Font name="System Bold" size="14.0" />
+                                                         </font>
+                                                      </Label>
+                                                   </children></AnchorPane>
+                                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="589.0" prefWidth="623.0">
+                                                   <children>
+                                                      <TableView fx:id="tVPesquisaSalasLivre" layoutY="-1.0" prefHeight="371.0" prefWidth="642.0">
+                                                        <columns>
+                                                          <TableColumn fx:id="tVPesquisaSalasLivreId" prefWidth="75.0" text="ID" />
+                                                            <TableColumn fx:id="tVPesquisaSalasLivreLotacao" prefWidth="75.0" text="LOTACAO" />
+                                                          <TableColumn fx:id="tVPesquisaSalasLivreTomadas" prefWidth="75.0" text="TOMADAS" />
+                                                            <TableColumn fx:id="tVPesquisaSalasLivrePiso" prefWidth="75.0" text="PISO" />
+                                                            <TableColumn fx:id="tVPesquisaSalasLivreProjector" prefWidth="75.0" text="PROJECTOR" />
+                                                            <TableColumn fx:id="tVPesquisaSalasLivreX" prefWidth="75.0" text="X" />
+                                                            <TableColumn fx:id="tVPesquisaSalasLivreY" prefWidth="75.0" text="Y" />
+                                                        </columns>
+                                                      </TableView>
+                                                      <TableView fx:id="tVPesquisaSalasOcupadas" layoutY="367.0" prefHeight="309.0" prefWidth="643.0">
+                                                        <columns>
+                                                            <TableColumn fx:id="tVPesquisaSalasOcupadasId" prefWidth="75.0" text="ID" />
+                                                            <TableColumn fx:id="tVPesquisaSalasOcupadasLotacao" prefWidth="75.0" text="LOTACAO" />
+                                                            <TableColumn fx:id="tVPesquisaSalasOcupadasTomadas" prefWidth="75.0" text="TOMADAS" />
+                                                            <TableColumn fx:id="tVPesquisaSalasOcupadasPiso" prefWidth="75.0" text="PISO" />
+                                                          <TableColumn fx:id="tVPesquisaSalasOcupadasProjector" prefWidth="75.0" text="PROJECTOR" />
+                                                          <TableColumn fx:id="tVPesquisaSalasOcupadasX" prefWidth="75.0" text="X" />
+                                                            <TableColumn fx:id="tVPesquisaSalasOcupadasY" prefWidth="75.0" text="Y" />
+                                                        </columns>
+                                                      </TableView>
+                                                   </children></AnchorPane>
+                                            </items>
+                                          </SplitPane>
+                                       </children></AnchorPane>
+                              </content>
+                            </Tab>
+                             <Tab onSelectionChanged="#handleApresentaDadosCBPesquisaProfessor" text="Professor UC">
+                                <content>
+                                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                       <children>
+                                          <SplitPane dividerPositions="0.36414253897550114" prefHeight="686.0" prefWidth="1024.0">
+                                            <items>
+                                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                                                   <children>
+                                                      <Label layoutX="5.0" layoutY="42.0" text="Unidades Curriculares">
+                                                         <font>
+                                                            <Font name="System Bold" size="14.0" />
+                                                         </font>
+                                                      </Label>
+                                                      <Label layoutX="14.0" layoutY="306.0" text="Professor">
+                                                         <font>
+                                                            <Font name="System Bold" size="14.0" />
+                                                         </font>
+                                                      </Label>
+                                                      <Label layoutX="1.0" layoutY="14.0" text="Todos os professores de uma unidade curricular">
+                                                         <font>
+                                                            <Font name="System Bold" size="14.0" />
+                                                         </font>
+                                                      </Label>
+                                                      <Label layoutX="12.0" layoutY="258.0" text="Todas as turmas de um professor">
+                                                         <font>
+                                                            <Font name="System Bold" size="14.0" />
+                                                         </font>
+                                                      </Label>
+                                                      <ComboBox fx:id="cbPesquisaUCProfessor" layoutX="161.0" layoutY="40.0" prefHeight="25.0" prefWidth="138.0" />
+                                                      <ComboBox fx:id="cbPesquisaProfessorProfessor" layoutX="82.0" layoutY="302.0" prefHeight="25.0" prefWidth="186.0" />
+                                                      <Button layoutX="14.0" layoutY="79.0" mnemonicParsing="false" onAction="#handlerPesquisaUCProfessor" prefHeight="25.0" prefWidth="285.0" text="Pesquisar professores de uma unidade curricular" />
+                                                      <Button layoutX="14.0" layoutY="341.0" mnemonicParsing="false" onAction="#handlerPesquisaProfessorProfessor" prefHeight="25.0" prefWidth="285.0" text="Pesquisar as turmas de um professor" />
+                                                   </children></AnchorPane>
+                                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                                                   <children>
+                                                      <TableView fx:id="tVPesquisaUCProfessor" prefHeight="304.0" prefWidth="647.0">
+                                                        <columns>
+                                                            <TableColumn fx:id="tVPesquisaUCProfessorIDTurma" prefWidth="75.0" text="ID Turma" />
+                                                          <TableColumn fx:id="tVPesquisaUCProfessorID" prefWidth="138.0" text="ID Professor" />
+                                                          <TableColumn fx:id="tVPesquisaUCProfessorProfessor" prefWidth="154.0" text="Professor" />
+                                                        </columns>
+                                                      </TableView>
+                                                      <TableView fx:id="tVPesquisaProfessorProfessor" layoutX="-1.0" layoutY="304.0" prefHeight="373.0" prefWidth="650.0">
+                                                        <columns>
+                                                          <TableColumn fx:id="tVPesquisaProfessorProfessorUc" prefWidth="153.0" text="UNIDADE CURRICULAR" />
+                                                        </columns>
+                                                      </TableView>
+                                                   </children></AnchorPane>
+                                            </items>
+                                          </SplitPane>
+                                       </children></AnchorPane>
+                                </content>
+                             </Tab>
+                             <Tab onSelectionChanged="#handleApresentaDadosCBPesquisaAtendimento" text="Atendimento Professor Aluno">
+                                <content>
+                                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                       <children>
+                                          <SplitPane dividerPositions="0.36414253897550114" prefHeight="685.0" prefWidth="1024.0">
+                                            <items>
+                                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="519.0" prefWidth="299.0">
+                                                   <children>
+                                                      <Label layoutX="5.0" layoutY="14.0" text="Todos os horarios disponiveis para atendimento">
+                                                         <font>
+                                                            <Font name="System Bold" size="14.0" />
+                                                         </font>
+                                                      </Label>
+                                                      <ComboBox fx:id="cbPesquisaAtendimento" layoutX="65.0" layoutY="41.0" prefHeight="25.0" prefWidth="247.0" />
+                                                      <Label layoutX="14.0" layoutY="44.0" text="Aluno">
+                                                         <font>
+                                                            <Font name="System Bold" size="14.0" />
+                                                         </font>
+                                                      </Label>
+                                                      <Button layoutX="8.0" layoutY="80.0" mnemonicParsing="false" onAction="#alunoPesquisaAtendimento" prefHeight="25.0" prefWidth="304.0" text="Pesquisa de atendimentos disponiveis" />
+                                                   </children></AnchorPane>
+                                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                                                   <children>
+                                                      <TableView fx:id="tVPesquisaAtendimento" layoutX="-4.0" prefHeight="684.0" prefWidth="651.0">
+                                                        <columns>
+                                                          <TableColumn fx:id="tVPesquisaAtendimentoProfessor" prefWidth="179.0" text="PROFESSOR" />
+                                                          <TableColumn fx:id="tVPesquisaAtendimentoHorario" prefWidth="130.0" text="HORARIO" />
+                                                            <TableColumn fx:id="tVPesquisaAtendimentoAluno" prefWidth="100.0" text="ALUNO" />
+                                                        </columns>
+                                                      </TableView>
+                                                   </children></AnchorPane>
+                                            </items>
+                                          </SplitPane>
+                                       </children></AnchorPane>
+                                </content>
+                             </Tab>
+                             <Tab onSelectionChanged="#handleApresentaDadosCBPesquisaSalasTipo" text="Tipos Salas">
+                                <content>
+                                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                       <children>
+                                          <SplitPane dividerPositions="0.30066815144766146" prefHeight="688.0" prefWidth="1024.0">
+                                            <items>
+                                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="517.0" prefWidth="277.0">
+                                                   <children>
+                                                      <Label layoutX="10.0" layoutY="4.0" text="Pesquisa de sala por criterio">
+                                                         <font>
+                                                            <Font name="System Bold Italic" size="14.0" />
+                                                         </font>
+                                                      </Label>
+                                                      <Label layoutX="10.0" layoutY="81.0" text="Nr MIN">
+                                                         <font>
+                                                            <Font name="System Bold" size="14.0" />
+                                                         </font>
+                                                      </Label>
+                                                      <TextField fx:id="tfNrMinTomadasPesquisaTipoSala" layoutX="77.0" layoutY="79.0" prefHeight="25.0" prefWidth="74.0" />
+                                                      <Button layoutX="167.0" layoutY="72.0" mnemonicParsing="false" onAction="#handlerNrMinTomadasPesquisaTipoSala" prefHeight="25.0" prefWidth="118.0" text="Pesquisa pelo min" />
+                                                      <Label layoutX="14.0" layoutY="123.0" text="Nr MAX">
+                                                         <font>
+                                                            <Font name="System Bold" size="14.0" />
+                                                         </font>
+                                                      </Label>
+                                                      <TextField fx:id="tfNrMaxTomadasPesquisaTipoSala" layoutX="81.0" layoutY="121.0" prefHeight="25.0" prefWidth="71.0" />
+                                                      <Button layoutX="171.0" layoutY="114.0" mnemonicParsing="false" onAction="#handlerNrMaxTomadasPesquisaTipoSala" prefHeight="25.0" prefWidth="118.0" text="Pesquisa pelo max" />
+                                                      <Label layoutX="29.0" layoutY="42.0" text="Numero tomadas">
+                                                         <font>
+                                                            <Font name="System Bold" size="14.0" />
+                                                         </font>
+                                                      </Label>
+                                                      <Label layoutX="16.0" layoutY="160.0" text="Nr MIN">
+                                                         <font>
+                                                            <Font name="System Bold" size="14.0" />
+                                                         </font>
+                                                      </Label>
+                                                      <TextField fx:id="tfMinIntervaloTomadasPesquisaTipoSala" layoutX="83.0" layoutY="158.0" prefHeight="25.0" prefWidth="71.0" />
+                                                      <Label layoutX="174.0" layoutY="158.0" text="Nr Max">
+                                                         <font>
+                                                            <Font name="System Bold" size="14.0" />
+                                                         </font>
+                                                      </Label>
+                                                      <TextField fx:id="tfMaxIntervaloTomadasPesquisaTipoSala" layoutX="241.0" layoutY="158.0" prefHeight="25.0" prefWidth="47.0" />
+                                                      <Line endX="159.0" layoutX="118.0" layoutY="255.0" startX="-100.0" />
+                                                      <Button layoutX="20.0" layoutY="203.0" mnemonicParsing="false" onAction="#handlerIntervaloTomadasPesquisaTipoSala" prefHeight="25.0" prefWidth="267.0" text="Pesquisa por intrevalo" />
+                                                      <Label layoutX="27.0" layoutY="296.0" text="Nr MIN">
+                                                         <font>
+                                                            <Font name="System Bold" size="14.0" />
+                                                         </font>
+                                                      </Label>
+                                                      <TextField fx:id="tfMinOcupadaPesquisaTipoSala" layoutX="94.0" layoutY="294.0" prefHeight="25.0" prefWidth="47.0" />
+                                                      <Button layoutX="158.0" layoutY="294.0" mnemonicParsing="false" onAction="#handlerMinOcupadaPesquisaTipoSala" prefHeight="25.0" prefWidth="113.0" text="Pesquisa pelo min" />
+                                                      <Label layoutX="29.0" layoutY="328.0" text="Nr MAX">
+                                                         <font>
+                                                            <Font name="System Bold" size="14.0" />
+                                                         </font>
+                                                      </Label>
+                                                      <TextField fx:id="tfMaxOcupadaPesquisaTipoSala" layoutX="96.0" layoutY="326.0" prefHeight="25.0" prefWidth="47.0" />
+                                                      <Button layoutX="157.0" layoutY="328.0" mnemonicParsing="false" onAction="#handlerMaxOcupadaPesquisaTipoSala" prefHeight="25.0" prefWidth="114.0" text="Pesquisa pelo max" />
+                                                      <Label layoutX="29.0" layoutY="268.0" text="Numero ocupada">
+                                                         <font>
+                                                            <Font name="System Bold" size="14.0" />
+                                                         </font>
+                                                      </Label>
+                                                      <Label layoutX="39.0" layoutY="416.0" text="Projector">
+                                                         <font>
+                                                            <Font name="System Bold" size="14.0" />
+                                                         </font>
+                                                      </Label>
+                                                      <Line endX="160.0" layoutX="124.0" layoutY="393.0" startX="-100.0" />
+                                                      <ComboBox fx:id="cbProjectorPesquisaTipoSala" layoutX="113.0" layoutY="414.0" prefWidth="150.0" />
+                                                      <Button layoutX="44.0" layoutY="453.0" mnemonicParsing="false" onAction="#handlerProjectorPesquisaTipoSala" prefHeight="25.0" prefWidth="221.0" text="Pesquisa por projector" />
+                                                      <Label layoutX="16.0" layoutY="572.0" text="Nr MIN">
+                                                         <font>
+                                                            <Font name="System Bold" size="14.0" />
+                                                         </font>
+                                                      </Label>
+                                                      <TextField fx:id="tfMinIntervaloLotacaoPesquisaTipoSala" layoutX="83.0" layoutY="570.0" prefHeight="25.0" prefWidth="47.0" />
+                                                      <Label layoutX="146.0" layoutY="535.0" text="Nr Max">
+                                                         <font>
+                                                            <Font name="System Bold" size="14.0" />
+                                                         </font>
+                                                      </Label>
+                                                      <TextField fx:id="tfMaxIntervaloLotacaoPesquisaTipoSala" layoutX="209.0" layoutY="570.0" prefHeight="25.0" prefWidth="47.0" />
+                                                      <Button layoutX="22.0" layoutY="601.0" mnemonicParsing="false" onAction="#handlerIntervaloLotacaoPesquisaTipoSala" prefHeight="25.0" prefWidth="217.0" text="Pesquisa por intrevalo" />
+                                                      <Line endX="152.0" layoutX="135.0" layoutY="520.0" startX="-100.0" />
+                                                      <Label layoutX="18.0" layoutY="534.0" text="Numero lotação">
+                                                         <font>
+                                                            <Font name="System Bold" size="14.0" />
+                                                         </font>
+                                                      </Label>
+                                                   </children></AnchorPane>
+                                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="397.0" prefWidth="567.0">
+                                                   <children>
+                                                      <TableView fx:id="tVPesquisaTipoSala" prefHeight="682.0" prefWidth="714.0">
+                                                        <columns>
+                                                          <TableColumn fx:id="tVPesquisaTipoSalaId" prefWidth="75.0" text="ID" />
+                                                          <TableColumn fx:id="tVPesquisaTipoSalaLotacao" prefWidth="75.0" text="LOTACAO" />
+                                                            <TableColumn fx:id="tVPesquisaTipoSalaTomados" prefWidth="75.0" text="TOMADAS" />
+                                                            <TableColumn fx:id="tVPesquisaTipoSalaPiso" prefWidth="75.0" text="PISO" />
+                                                            <TableColumn fx:id="tVPesquisaTipoSalaProjector" prefWidth="82.0" text="PROJECTOR" />
+                                                            <TableColumn fx:id="tVPesquisaTipoSalaX" prefWidth="68.0" text="X" />
+                                                            <TableColumn fx:id="tVPesquisaTipoSalaY" prefWidth="75.0" text="Y" />
+                                                        </columns>
+                                                      </TableView>
+                                                   </children></AnchorPane>
+                                            </items>
+                                          </SplitPane>
+                                       </children></AnchorPane>
+                                </content>
+                             </Tab>
+                             <Tab onSelectionChanged="#handleApresentaDadosCBPesquisaNow" text="Now">
+                                <content>
+                                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                       <children>
+                                          <TextArea fx:id="tANow" layoutX="4.0" layoutY="30.0" prefHeight="653.0" prefWidth="1018.0" />
+                                          <Label layoutX="14.0" layoutY="6.0" text="Funcao now">
+                                             <font>
+                                                <Font name="System Bold" size="12.0" />
+                                             </font>
+                                          </Label>
+                                       </children></AnchorPane>
+                                </content>
+                             </Tab>
+
+                          </tabs>
+                        </TabPane>
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+           <Tab onSelectionChanged="#handleApresentaDadosCBGrafos" text="Grafos">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="669.0" prefWidth="989.0">
+                     <children>
+                        <SplitPane dividerPositions="0.29354207436399216" prefHeight="715.0" prefWidth="1024.0">
+                          <items>
+                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="713.0" prefWidth="269.0">
+                                 <children>
+                                    <TextField fx:id="tFtabGrafosX" layoutX="14.0" layoutY="51.0" prefHeight="25.0" prefWidth="68.0" promptText="X" />
+                                    <TextField fx:id="tFtabGrafosY" layoutX="100.0" layoutY="51.0" prefHeight="25.0" prefWidth="68.0" promptText="Y" />
+                                    <Label layoutX="11.0" layoutY="21.0" text="Calculo da distancia a partir de um ponto">
+                                       <font>
+                                          <Font name="System Bold Italic" size="12.0" />
+                                       </font>
+                                    </Label>
+                                    <ComboBox fx:id="cbtabGrafosPiso" layoutX="175.0" layoutY="51.0" prefHeight="25.0" prefWidth="78.0" promptText="Piso" />
+                                    <TextField fx:id="tFtabGrafosDistancia" editable="false" layoutX="14.0" layoutY="92.0" prefHeight="25.0" prefWidth="68.0" promptText="Distancia" />
+                                    <TextField fx:id="tFtabGrafosTempo" editable="false" layoutX="100.0" layoutY="92.0" prefHeight="25.0" prefWidth="68.0" promptText="Tempo" />
+                                    <Button layoutX="12.0" layoutY="127.0" mnemonicParsing="false" onAction="#handlertabGrafosDistancia" prefHeight="25.0" prefWidth="119.0" text="Pesquisa distancia" />
+                                    <ComboBox fx:id="cbtabGrafosOrigem" layoutX="16.0" layoutY="196.0" onAction="#handlerPreencherDestinoGrafo" prefHeight="25.0" prefWidth="116.0" promptText="Origem " />
+                                    <ComboBox fx:id="cbtabGrafosPontoDestino" layoutX="180.0" layoutY="93.0" prefHeight="25.0" prefWidth="101.0" promptText="Destino" />
+                                    <Label layoutX="22.0" layoutY="179.0" prefHeight="17.0" prefWidth="66.0" text="Origem">
+                                       <font>
+                                          <Font name="System Bold" size="12.0" />
+                                       </font>
+                                    </Label>
+                                    <Label layoutX="182.0" layoutY="76.0" prefHeight="17.0" prefWidth="66.0" text="Destino">
+                                       <font>
+                                          <Font name="System Bold" size="12.0" />
+                                       </font>
+                                    </Label>
+                                    <ComboBox fx:id="cbtabSubGrafosPiso" layoutX="23.0" layoutY="315.0" prefHeight="25.0" prefWidth="87.0" promptText="Piso" />
+                                    <Label layoutX="17.0" layoutY="283.0" text="Criar um subgrafo por piso">
+                                       <font>
+                                          <Font name="System Bold" size="12.0" />
+                                       </font>
+                                    </Label>
+                                    <Button layoutX="138.0" layoutY="315.0" mnemonicParsing="false" onAction="#handlertabSubGrafosPiso" prefHeight="25.0" prefWidth="99.0" text="Criar" />
+                                    <Line endX="145.0" layoutX="117.0" layoutY="355.0" startX="-100.0" />
+                                    <Line endX="145.0" layoutX="115.0" layoutY="268.0" startX="-100.0" />
+                                    <Line endX="145.0" layoutX="113.0" layoutY="167.0" startX="-100.0" />
+                                    <Button layoutX="137.0" layoutY="394.0" mnemonicParsing="false" onAction="#handlerAdicionarTabSubGrafosEvitarPontos" prefHeight="25.0" prefWidth="99.0" text="Adicionar" />
+                                    <Label layoutX="22.0" layoutY="368.0" prefHeight="17.0" prefWidth="126.0" text="Set de pontos a evitar">
+                                       <font>
+                                          <Font name="System Bold Italic" size="12.0" />
+                                       </font>
+                                    </Label>
+                                    <Line endX="145.0" layoutX="110.0" layoutY="477.0" startX="-100.0" />
+                                    <Button layoutX="12.0" layoutY="514.0" mnemonicParsing="false" onAction="#handlerCriarTabSubGrafosEmergencia" prefHeight="25.0" prefWidth="223.0" text="Criar grafo" />
+                                    <Label layoutX="21.0" layoutY="488.0" prefHeight="17.0" prefWidth="158.0" text="Ativar saida de emergencia">
+                                       <font>
+                                          <Font name="System Bold Italic" size="12.0" />
+                                       </font>
+                                    </Label>
+                                    <Button layoutX="141.0" layoutY="127.0" mnemonicParsing="false" onAction="#handlertabGrafosTempo" prefHeight="25.0" prefWidth="119.0" text="Pesquisa tempo" />
+                                    <Button layoutX="14.0" layoutY="233.0" mnemonicParsing="false" onAction="#handlertabGrafosDistanciaOD" prefHeight="25.0" prefWidth="119.0" text="Pesquisa distancia" />
+                                    <Button layoutX="143.0" layoutY="233.0" mnemonicParsing="false" onAction="#handlertabGrafosTempoOD" prefHeight="25.0" prefWidth="119.0" text="Pesquisa tempo" />
+                                    <Button layoutX="21.0" layoutY="433.0" mnemonicParsing="false" onAction="#handlerCriarTabSubGrafosEvitarPontos" prefHeight="25.0" prefWidth="215.0" text="Criar grafo sem estes pontos" />
+                                    <ComboBox fx:id="cbtabGrafosDestino" layoutX="152.0" layoutY="196.0" prefHeight="25.0" prefWidth="101.0" promptText="Destino" />
+                                    <TextField fx:id="tFtabGrafosConexo" layoutX="170.0" layoutY="279.0" prefHeight="25.0" prefWidth="122.0" />
+                                    <ComboBox fx:id="tFTabSubGrafosEvitarPontos" layoutX="18.0" layoutY="394.0" prefHeight="25.0" prefWidth="106.0" promptText="Selecionar vertice" />
+                                 </children>
+                              </AnchorPane>
+                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="713.0" prefWidth="724.0">
+                                 <children>
+                                    <SplitPane dividerPositions="0.3028169014084507" orientation="VERTICAL" prefHeight="717.0" prefWidth="720.0">
+                                      <items>
+                                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="216.0" prefWidth="732.0">
+                                             <children>
+                                                <TextArea fx:id="tAtabGrafos" editable="false" layoutX="3.0" layoutY="23.0" prefHeight="188.0" prefWidth="709.0" wrapText="true" />
+                                                <Label layoutX="14.0" layoutY="6.0" text="Informação sobre a pesquisa">
+                                                   <font>
+                                                      <Font name="System Bold Italic" size="12.0" />
+                                                   </font>
+                                                </Label>
+                                             </children>
+                                          </AnchorPane>
+                                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="464.0" prefWidth="694.0">
+                                             <children>
+                                                <Group fx:id="gtabGrafos" layoutX="347.0" layoutY="232.0" />
+                                             </children>
+                                          </AnchorPane>
+                                      </items>
+                                    </SplitPane>
+                                 </children>
+                              </AnchorPane>
+                          </items>
+                        </SplitPane>
+                     </children></AnchorPane>
+               </content>
+            </Tab>
+           <Tab onSelectionChanged="#handleApresentaDadosCBGrafosListagem" text="Grafos listagem">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="669.0" prefWidth="989.0">
+                     <children>
+                        <SplitPane dividerPositions="0.2054794520547945" layoutY="1.0" prefHeight="707.0" prefWidth="1024.0">
+                          <items>
+                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                                 <children>
+                                    <Label layoutX="14.0" layoutY="14.0" prefHeight="20.0" prefWidth="115.0" text="Adicionar vertice">
+                                       <font>
+                                          <Font name="System Bold Italic" size="14.0" />
+                                       </font>
+                                    </Label>
+                                    <TextField fx:id="grafosListagemX" layoutX="25.0" layoutY="59.0" prefHeight="25.0" prefWidth="64.0" />
+                                    <TextField fx:id="grafosListagemY" layoutX="128.0" layoutY="59.0" prefHeight="25.0" prefWidth="70.0" />
+                                    <ComboBox fx:id="grafosListagemPiso" layoutX="72.0" layoutY="93.0" prefHeight="25.0" prefWidth="130.0" />
+                                    <TextField fx:id="grafosListagemDescricao" layoutX="11.0" layoutY="153.0" prefHeight="25.0" prefWidth="185.0" />
+                                    <ComboBox fx:id="grafosListagemIndoor" layoutX="14.0" layoutY="216.0" prefHeight="25.0" prefWidth="185.0" promptText="Indoor / Outdoor" />
+                                    <Label layoutX="9.0" layoutY="62.0" text="X">
+                                       <font>
+                                          <Font name="System Bold" size="14.0" />
+                                       </font>
+                                    </Label>
+                                    <Label layoutX="107.0" layoutY="62.0" text="Y">
+                                       <font>
+                                          <Font name="System Bold" size="14.0" />
+                                       </font>
+                                    </Label>
+                                    <Label layoutX="16.0" layoutY="96.0" prefHeight="20.0" prefWidth="37.0" text="Piso">
+                                       <font>
+                                          <Font name="System Bold" size="14.0" />
+                                       </font>
+                                    </Label>
+                                    <Label layoutX="21.0" layoutY="126.0" text="Descrição do local">
+                                       <font>
+                                          <Font name="System Bold Italic" size="14.0" />
+                                       </font>
+                                    </Label>
+                                    <Label layoutX="22.0" layoutY="184.0" text="Indoor ou outdoor">
+                                       <font>
+                                          <Font name="System Bold Italic" size="14.0" />
+                                       </font>
+                                    </Label>
+                                    <ComboBox fx:id="grafosListagemCbO" layoutX="11.0" layoutY="328.0" prefHeight="25.0" prefWidth="186.0" />
+                                    <ComboBox fx:id="grafosListagemCbD" layoutX="11.0" layoutY="377.0" prefHeight="25.0" prefWidth="186.0" />
+                                    <Label layoutX="12.0" layoutY="308.0" text="Origem da aresta">
+                                       <font>
+                                          <Font name="System Bold Italic" size="14.0" />
+                                       </font>
+                                    </Label>
+                                    <Label layoutX="14.0" layoutY="357.0" text="Destino da aresta">
+                                       <font>
+                                          <Font name="System Bold Italic" size="14.0" />
+                                       </font>
+                                    </Label>
+                                    <Button layoutX="9.0" layoutY="418.0" mnemonicParsing="false" onAction="#handlerAdicionarArestas" prefHeight="25.0" prefWidth="187.0" text="Adicionar aresta" />
+                                    <Button layoutX="13.0" layoutY="262.0" mnemonicParsing="false" onAction="#handlergrafosListagemAdicionarVertice" prefHeight="25.0" prefWidth="187.0" text="Adicionar vertice" />
+                                    <Button layoutX="13.0" layoutY="496.0" mnemonicParsing="false" onAction="#handlerRemoverArestas" prefHeight="25.0" prefWidth="187.0" text="Remover Arestas" />
+                                    <Button layoutX="13.0" layoutY="532.0" mnemonicParsing="false" onAction="#handlerRemoverVertice" prefHeight="25.0" prefWidth="187.0" text="Remover Vertice" />
+                                    <Line endX="100.0" layoutX="106.0" layoutY="473.0" startX="-100.0" />
+                                 </children>
+                              </AnchorPane>
+                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                                 <children>
+                                    <TableView fx:id="grafosListagemTV" prefHeight="308.0" prefWidth="811.0">
+                                      <columns>
+                                        <TableColumn fx:id="grafosListagemID" prefWidth="75.0" text="ID" />
+                                        <TableColumn fx:id="grafosListagemTvDescricao" prefWidth="75.0" text="Descricao" />
+                                          <TableColumn fx:id="grafosListagemXTv" prefWidth="75.0" text="X" />
+                                          <TableColumn fx:id="grafosListagemYTv" prefWidth="75.0" text="Y" />
+                                          <TableColumn fx:id="grafosListagemZTv" prefWidth="75.0" text="Z" />
+                                      </columns>
+                                    </TableView>
+                                    <TableView fx:id="grafosListagemTvArestas" layoutY="308.0" prefHeight="397.0" prefWidth="808.0">
+                                      <columns>
+                                        <TableColumn fx:id="grafosListagemTvArestaV" prefWidth="75.0" text="ID V" />
+                                        <TableColumn fx:id="grafosListagemTvArestaW" prefWidth="75.0" text="ID W" />
+                                          <TableColumn fx:id="grafosListagemTvArestaWeight" prefWidth="75.0" text="WEIGHT" />
+                                          <TableColumn fx:id="grafosListagemTvArestaTempo" prefWidth="75.0" text="TEMPO" />
+                                      </columns>
+                                    </TableView>
+                                 </children>
+                              </AnchorPane>
+                          </items>
+                        </SplitPane>
+                     </children></AnchorPane>
+               </content>
+            </Tab>
+           <Tab onSelectionChanged="#handleApresentaDadosCBGrafosLst" text="Grafo Desenho">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="669.0" prefWidth="989.0">
+                     <children>
+                        <Group fx:id="groupGrafoDesenho" translateY="200.0">
+                           <rotationAxis>
+                              <Point3D />
+                           </rotationAxis>
+                        </Group>
+                     </children></AnchorPane>
+               </content>
+            </Tab>
+        </tabs>
+      </TabPane>
+   </children>
+</AnchorPane>

@@ -1,0 +1,3 @@
+id;nome
+CPSUK;Engenharia Civil
+EGLEQ;Engenharia Informática
